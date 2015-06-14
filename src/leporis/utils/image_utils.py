@@ -14,8 +14,8 @@ def resize_to(img, width=512, height=None):
     return cv2.resize(img, (width, height))
 
 
-def draw_key_points(img, key_points, radius=4, color=(255, 0, 0), thickness=1):
+def draw_points(img, points, radius=4, color=(255, 0, 0), thickness=1):
     h, w = img.shape[:2]
-    for point in key_points:
+    for point in points:
         cv2.circle(img, (int(point[0]*w), int(point[1]*w)), radius, color, thickness)
     return img
