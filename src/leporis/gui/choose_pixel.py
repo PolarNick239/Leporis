@@ -11,7 +11,7 @@ from leporis.utils.image_utils import resize_to, draw_points
 
 
 def _to_absolute_points(points, w):
-    return (np.array(points) * w).astype(np.int)
+    return (np.array(points) * w).astype(np.int32)
 
 
 def run_choose_pixel(image_file,

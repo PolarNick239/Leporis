@@ -46,3 +46,5 @@ class FeatureMatcherTest(unittest.TestCase):
         # cv2.imshow('img0', draw_points(draw_points(resize_to(self.img0), kp0[match01.p_idx0], color=(0, 255, 0), thickness=2), match10.points1, color=(255, 0, 0)))
         # cv2.imshow('img1', draw_points(resize_to(self.img1), match01.points1, color=(255, 0, 0)))
         # cv2.waitKey()
+
+        # TODO: assert smth
