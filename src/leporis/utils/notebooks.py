@@ -7,6 +7,8 @@ import matplotlib as mpl
 
 
 def _imshow_bgr(img):
+    if img.shape[2] == 4:
+        img = img[:, :, :3]
     rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     plt.imshow(rgb)
     plt.show()

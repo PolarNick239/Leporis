@@ -1,6 +1,7 @@
 __author__ = "Polyarnyi Nickolay"
 
 import numpy as np
+import pyopencl as cl
 
 
 def norm2(a):
@@ -32,3 +33,29 @@ def iter_grouped(key, a, is_sorted=False):
     idx = [0] + list(np.diff(key).nonzero()[0] + 1) + [len(key)]
     for i1, i2 in zip(idx[:-1], idx[1:]):
         yield key[i1], a[i1:i2]
+
+
+def create_cl_contex(device_type=None):
+    if device_type is None:
+        context, device = create_cl_contex(cl.device_type.GPU)
+        if context is not None:
+            return context, device
+        context, device = create_cl_contex(cl.device_type.CPU)
+        if context is not None:
+            return context, device
+        raise Exception('No GPU or CPU OpenCL devices!')
+
+    platforms = cl.get_platforms()
+    if len(platforms) == 0:
+        return None, None
+
+    context, device = None, None
+    for platform in platforms:
+        devices = platform.get_devices(device_type)
+        if len(devices) != 0:
+            device = devices[0]
+            context = cl.Context([device])
+            break
+
+    return context, device
+
